@@ -34,17 +34,17 @@ class PokemonPage extends React.Component {
   handleChange = event => {
     this.setState({
       searchData: event.target.value
-    }, () => this.handleSearch())
+    })
   }
 
-  handleSearch = () => {
-    let result = this.state.pokemon.filter(pokemon => {
-      return pokemon.name.toLowerCase().includes(this.state.searchData.toLowerCase())
-    })
-    if (this.state.pokemon !== result && result.length > 0) {
-      this.setState({pokemon: result})
-    }
-  }
+  // handleSearch = () => {
+  //   let result = this.state.pokemon.filter(pokemon => {
+  //     return pokemon.name.toLowerCase().includes(this.state.searchData.toLowerCase())
+  //   })
+  //   if (this.state.pokemon !== result && result.length > 0) {
+  //     this.setState({pokemon: result})
+  //   }
+  // }
 
   handleForm = newPokemon => {
     const requestOptions = {
@@ -69,6 +69,9 @@ class PokemonPage extends React.Component {
   }
 
   render() {
+    let getPokemon = this.state.pokemon.filter(pokemon => {
+      return pokemon.name.toLowerCase().includes(this.state.searchData.toLowerCase())})
+
     return (
       <Container>
         <h1>Pokemon Searcher</h1>
@@ -77,7 +80,7 @@ class PokemonPage extends React.Component {
         <br />
         <Search handleChange={this.handleChange}/>
         <br />
-        <PokemonCollection pokemon={this.state.pokemon} deletePokemon={this.deletePokemon} />
+        <PokemonCollection pokemon={getPokemon} deletePokemon={this.deletePokemon} />
       </Container>
     )
   }
